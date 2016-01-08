@@ -5,19 +5,19 @@ angular.module('scrapApp').controller('addItemController', ['$mdDialog', '$http'
 
   this.cancel = $mdDialog.cancel;
   
-  function success(dessert) {
-    $mdDialog.hide(dessert);
-  }
-  
+  $scope.item = {}
+  $scope.item.actif = 'disponible';
+
+
   this.addItem = function () {
     $scope.item.form.$setSubmitted();
     
     if($scope.item.form.$valid) {
      
         $http({
-          url: 'http://magimat.ca/forum/admin/store/addItem.php', 
+          url: 'http://www.scrapbookartetpassion.com/forum/admin/store/addItem.php', 
           method: "GET",
-          params: {nom: $scope.item.nom, quantite: $scope.item.quantite, prix: $scope.item.prix, compagnie: $scope.item.compagnie}
+          params: {nom: $scope.item.nom, actif: $scope.item.actif, prix: $scope.item.prix, compagnie: $scope.item.compagnie}
         }).then(function successCallback(response) {
             console.log(response)
             $mdDialog.hide();

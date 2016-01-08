@@ -19,6 +19,20 @@ angular.module('scrapApp').controller('scrapController', ['$resource','$mdDialog
       templateUrl: 'templates/add-dialog.html',
     }).then(getItems);
   };
+
+  $scope.edit = function (event) {
+
+    $mdDialog.show({
+      clickOutsideToClose: true,
+      controller: 'editItemController',
+      controllerAs: 'ctrl',
+      focusOnOpen: false,
+      targetEvent: event,
+      locals: { item: $scope.item },
+      templateUrl: 'templates/edit-dialog.html',
+    }).then(getItems);
+  };
+
   
   $scope.delete = function (event) {
     $mdDialog.show({
@@ -27,7 +41,7 @@ angular.module('scrapApp').controller('scrapController', ['$resource','$mdDialog
       controllerAs: 'ctrl',
       focusOnOpen: false,
       targetEvent: event,
-      locals: { items: $scope.selected },
+      locals: { item: $scope.selected },
       templateUrl: 'templates/delete-dialog.html',
     }).then(getItems);
   };
@@ -41,14 +55,7 @@ angular.module('scrapApp').controller('scrapController', ['$resource','$mdDialog
     }
   };
 
-  $scope.onDeselect = function () {
-    $scope.selected.length--;
-  };
-  
-  $scope.onSelect = function () {
-    $scope.selected.length++;
-  };
-  
+
   
 getItems();
   
