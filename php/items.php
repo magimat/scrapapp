@@ -1,6 +1,10 @@
+
 <?php
+
+    include 'config.php';
+
     //open connection to mysql db
-    $connection = mysqli_connect("localhost","root","enirak","scrap") or die("Error " . mysqli_error($connection));
+    $connection = mysqli_connect("localhost", $mysqluser, $mysqlpwd, "scrap") or die("Error " . mysqli_error($connection));
 
     //fetch table rows from mysql db
     $sql = "select * from items";

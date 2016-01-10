@@ -1,6 +1,8 @@
 <?php
+    include 'config.php';
+
     //open connection to mysql db
-    $connection = mysqli_connect("localhost","root","enirak","scrap") or die("Error " . mysqli_error($connection));
+    $connection = mysqli_connect("localhost", $mysqluser, $mysqlpwd, "scrap") or die("Error " . mysqli_error($connection));
 
     $nom = $_GET['nom'];
     $compagnie = $_GET['compagnie'];

@@ -22,13 +22,15 @@ angular.module('scrapApp').controller('scrapController', ['$resource','$mdDialog
 
   $scope.edit = function (event) {
 
+console.log($scope.selected[0])
+
     $mdDialog.show({
       clickOutsideToClose: true,
       controller: 'editItemController',
       controllerAs: 'ctrl',
       focusOnOpen: false,
       targetEvent: event,
-      locals: { item: $scope.item },
+      locals: { item: $scope.selected[0] },
       templateUrl: 'templates/edit-dialog.html',
     }).then(getItems);
   };
@@ -54,7 +56,6 @@ angular.module('scrapApp').controller('scrapController', ['$resource','$mdDialog
       $scope.filter.form.$setPristine();
     }
   };
-
 
   
 getItems();

@@ -1,10 +1,12 @@
 
 
-angular.module('scrapApp').controller('editItemController', ['$mdDialog', '$http', '$scope', function ($mdDialog, $http, $scope) {
+angular.module('scrapApp').controller('editItemController', ['$mdDialog', 'item', '$http', '$scope', function ($mdDialog, item, $http, $scope) {
   'use strict';
 
   this.cancel = $mdDialog.cancel;
   
+
+  $scope.item = item;
 
   this.editItem = function () {
     $scope.item.form.$setSubmitted();

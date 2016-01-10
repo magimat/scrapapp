@@ -52,11 +52,11 @@
               </tr>
             </thead>
             <tbody md-body>
-              <tr md-row md-select="item" md-on-select="logItem" md-auto-select ng-repeat="item in items | filter: query.filter | orderBy: query.order">
+              <tr md-row md-select="item" md-select-id="{{item.id}}" md-auto-select ng-repeat="item in items | filter: query.filter | orderBy: query.order">
                 <td md-cell>{{item.id}}</md-cell>
                 <td md-cell>{{item.nom}}</md-cell>
                 <td md-cell>{{item.compagnie}}</md-cell>
-                <td md-cell>{{item.prix}}</md-cell>
+                <td md-cell>{{item.prix | currency}}</md-cell>
                 <td md-cell>{{item.quantite}}</md-cell>
               </tr>
             </tbody>
