@@ -1,0 +1,46 @@
+
+<html lang="en" ng-app="scrapApp">
+
+  <head>
+    
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <title>Commande PO</title>
+    
+
+	  <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/angular_material/1.0.0/angular-material.min.css">
+
+    <link href="app.css" rel="stylesheet" type="text/css"/>
+    <base href=".">
+  </head>
+
+  <body layout="column">
+    
+    <md-toolbar>
+      <div class="md-toolbar-tools" layout-align="space-between">
+        <div class="md-title">Commande PO</div>
+      </div>
+    </md-toolbar>
+    
+    <md-content ng-controller="orderController" layout="column" flex>
+      
+      {{ username }}
+      {{ id }}
+      
+    </md-content>
+    
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-animate.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-aria.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-messages.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-resource.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angular_material/1.0.0/angular-material.min.js"></script>
+
+
+    <script type="text/javascript" src="app.js"></script>
+    <script type="text/javascript" src="scripts/orderController.js"></script>
+    
+  </body>
+</html>
