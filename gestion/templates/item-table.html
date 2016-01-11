@@ -48,7 +48,7 @@
                 <th md-column md-order-by="nom"><span>Item</span></th>
                 <th md-column md-order-by="compagnie"><span>Compagnie</span></th>
                 <th md-column md-numeric md-order-by="prix"><span>Prix</span></th>
-                <th md-column md-numeric md-order-by="quantite"><span>Quantité disponible</span></th>
+                <th md-column md-numeric md-order-by="actif"><span>Item disponible pour PO</span></th>
               </tr>
             </thead>
             <tbody md-body>
@@ -57,7 +57,7 @@
                 <td md-cell>{{item.nom}}</md-cell>
                 <td md-cell>{{item.compagnie}}</md-cell>
                 <td md-cell>{{item.prix | currency}}</md-cell>
-                <td md-cell>{{item.quantite}}</md-cell>
+                <td md-cell>{{item.actif}}</md-cell>
               </tr>
             </tbody>
           </table>

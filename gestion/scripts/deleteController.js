@@ -1,34 +1,30 @@
 
 
-angular.module('scrapApp').controller('deleteController', ['$authorize', 'desserts', '$mdDialog', '$nutrition', '$scope', '$q', function ($authorize, desserts, $mdDialog, $nutrition, $scope, $q) {
+angular.module('scrapApp').controller('deleteController', ['$mdDialog', 'items', '$scope', '$http', function ($mdDialog, items, $scope, $http) {
   'use strict';
   
   this.cancel = $mdDialog.cancel;
   
-  function deleteDessert(dessert, index) {
-    var deferred = $nutrition.desserts.remove({id: dessert._id});
-    
-    deferred.$promise.then(function () {
-      desserts.splice(index, 1);
-    });
-    
-    return deferred.$promise;
+
+  function deleteItem(item) {
+
+    $http({
+          url: 'http://www.scrapbookartetpassion.com/forum/admin/store/deleteItem.php', 
+          method: "GET",
+          params: {id: item.id}
+        }).then(function successCallback(response) {
+            console.log(response)
+        }, function errorCallback(response) {
+            console.log(response)
+        });
+
   }
-  
-  function onComplete() {
+
+
+  this.deleteItems = function () {
+    items.forEach(deleteItem)
     $mdDialog.hide();
   }
   
-  function error() {
-    $scope.error = 'Invalid secret.';
-  }
-  
-  function success() {
-    $q.all(desserts.forEach(deleteDessert)).then(onComplete);
-  }
-  
-  this.authorizeUser = function () {
-    $authorize.get({secret: $scope.authorize.secret}, success, error);
-  };
   
 }]);

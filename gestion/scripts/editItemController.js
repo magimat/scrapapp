@@ -8,6 +8,7 @@ angular.module('scrapApp').controller('editItemController', ['$mdDialog', 'item'
 
   $scope.item = item;
 
+
   this.editItem = function () {
     $scope.item.form.$setSubmitted();
     

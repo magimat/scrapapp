@@ -21,9 +21,6 @@ angular.module('scrapApp').controller('scrapController', ['$resource','$mdDialog
   };
 
   $scope.edit = function (event) {
-
-console.log($scope.selected[0])
-
     $mdDialog.show({
       clickOutsideToClose: true,
       controller: 'editItemController',
@@ -43,7 +40,7 @@ console.log($scope.selected[0])
       controllerAs: 'ctrl',
       focusOnOpen: false,
       targetEvent: event,
-      locals: { item: $scope.selected },
+      locals: { items: $scope.selected },
       templateUrl: 'templates/delete-dialog.html',
     }).then(getItems);
   };
