@@ -7,6 +7,7 @@ angular.module('scrapApp').controller('scrapController', ['$resource','$mdDialog
 
   function getItems(query) {
     $scope.items = $resource('http://www.scrapbookartetpassion.com/forum/admin/store/items.php').query();
+    $scope.selected.length = 0;
   }
   
   $scope.addItem = function (event) {
