@@ -19,7 +19,7 @@ angular.module('scrapApp').controller('orderController', ['$window', '$location'
             $scope.item = response.data;
 
             if($scope.item.actif == 'non disponible') {
-                 $window.location.href = '/app/#/orderfail';
+                 $window.location.href = '/forum/admin/store/app/#/orderfail';
             }
 
         }, function errorCallback(response) {
@@ -35,7 +35,7 @@ angular.module('scrapApp').controller('orderController', ['$window', '$location'
             $scope.curpo = response.data;
             console.log($scope.curpo)
         }, function errorCallback(response) {
-            $window.location.href = '/app/#/orderfail';
+            $window.location.href = '/forum/admin/store/app/#/orderfail';
         });
 
 
@@ -47,9 +47,9 @@ angular.module('scrapApp').controller('orderController', ['$window', '$location'
           method: "GET",
           params: {id: $scope.id, username: $scope.username, quantite: $scope.nbItems, poid: $scope.curpo.id}
         }).then(function successCallback(response) {
-           $window.location.href = '/app/#/ordersuccess';
+           $window.location.href = '/forum/admin/store/app/#/ordersuccess';
         }, function errorCallback(response) {
-            $window.location.href = '/app/#/orderfail';
+            $window.location.href = '/forum/admin/store/app/#/orderfail';
         });
 
   }
