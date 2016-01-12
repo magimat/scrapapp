@@ -10,12 +10,24 @@ angular.module('scrapApp', ['md.data.table', 'ngMaterial', 'ngResource', 'ngRout
       .accentPalette('pink');
 
  	$routeProvider.
+      when('/viewpo', {
+        templateUrl: 'views/viewpo.html',
+        controller: 'poController'
+      }).
       when('/gestion', {
-        templateUrl: 'views/gestionpo.html',
+        templateUrl: 'views/gestion_items.html',
         controller: 'scrapController'
       }).
       when('/order', {
-        templateUrl: 'views/placeorder.html',
+        templateUrl: 'views/order.html',
+        controller: 'orderController'
+      }).
+      when('/ordersuccess', {
+        templateUrl: 'views/ordersuccess.html',
+        controller: 'orderController'
+      }).
+      when('/orderfail', {
+        templateUrl: 'views/orderfail.html',
         controller: 'orderController'
       }).
       otherwise({

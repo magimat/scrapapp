@@ -1,6 +1,6 @@
 
 
-angular.module('scrapApp').controller('orderController', ['$location', '$mdDialog', '$http', '$scope', function ($location, $mdDialog, $http, $scope) {
+angular.module('scrapApp').controller('orderController', ['$window', '$location', '$mdDialog', '$http', '$scope', function ($window, $location, $mdDialog, $http, $scope) {
   'use strict';
 
   this.cancel = $mdDialog.cancel;
@@ -8,21 +8,50 @@ angular.module('scrapApp').controller('orderController', ['$location', '$mdDialo
   $scope.username = $location.search().username
   $scope.id = $location.search().id
 
-  $scope.nbItems = 0;
+  $scope.nbItems = 1;
 
 
-  this.orderItem = function () {
-     
-        $http({
-          url: 'http://www.scrapbookartetpassion.com/forum/admin/store/addItem.php', 
+  $http({
+          url: 'http://www.scrapbookartetpassion.com/forum/admin/store/getItem.php', 
           method: "GET",
-          params: {nom: $scope.item.nom, actif: $scope.item.actif, prix: $scope.item.prix, compagnie: $scope.item.compagnie}
+          params: {id: $scope.id}
         }).then(function successCallback(response) {
-            console.log(response)
-            $mdDialog.hide();
+            $scope.item = response.data;
+
+            if($scope.item.actif == 'non disponible') {
+                 $window.location.href = '/app/#/orderfail';
+            }
+
         }, function errorCallback(response) {
             console.log(response)
         });
+
+
+  $http({
+          url: 'http://www.scrapbookartetpassion.com/forum/admin/store/getCurrentPO.php', 
+          method: "GET",
+          params: {}
+        }).then(function successCallback(response) {
+            $scope.curpo = response.data;
+            console.log($scope.curpo)
+        }, function errorCallback(response) {
+            $window.location.href = '/app/#/orderfail';
+        });
+
+
+
+  $scope.orderItem = function () {
+     
+        $http({
+          url: 'http://www.scrapbookartetpassion.com/forum/admin/store/orderItem.php', 
+          method: "GET",
+          params: {id: $scope.id, username: $scope.username, quantite: $scope.nbItems, poid: $scope.curpo.id}
+        }).then(function successCallback(response) {
+           $window.location.href = '/app/#/ordersuccess';
+        }, function errorCallback(response) {
+            $window.location.href = '/app/#/orderfail';
+        });
+
   }
   
   

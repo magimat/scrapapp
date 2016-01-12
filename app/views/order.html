@@ -1,0 +1,27 @@
+    <md-toolbar>
+      <div class="md-toolbar-tools" layout-align="space-between">
+        <div class="md-title">Précommande</div>
+      </div>
+    </md-toolbar>
+    
+    <md-content layout="column" flex>
+      
+      <p>Bonjour <span class="highlight">{{ username }}</span>,</p>
+
+      <p>Vous souhaitez pré-commander l'article suivant: <span class="highlight">{{ item.desc }}</span>.</p>
+
+      <p>au coût de <span class="highlight">{{ item.prix | currency }}</span> l'unité.</p>
+
+      <p>
+     	<md-input-container>
+    	    <label>Quantité</label>
+        	<input required type="number" step="any" ng-model="nbItems" min="1"/>
+      
+		</md-input-container>
+      
+
+    
+			<md-button class="md-primary" ng-click="orderItem()" ng-disabled="item.form.$invalid">Commander</md-button>
+	  </p>
+
+    </md-content>

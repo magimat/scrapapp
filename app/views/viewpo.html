@@ -1,0 +1,38 @@
+    <md-toolbar>
+      <div class="md-toolbar-tools" layout-align="space-between">
+        <div class="md-title">Détail PO</div>
+      </div>
+    </md-toolbar>
+    
+    <md-content layout="column" flex>
+      
+ 
+
+     <md-table-container>
+          <table md-table md-row-select ng-model="selected" md-progress="promise">
+            <thead md-head md-order="query.order">
+              <tr md-row>
+                <th md-column md-order-by="dt_order"><span>DATE</span></th>
+                <th md-column md-order-by="username"><span>User</span></th>
+                <th md-column md-order-by="item_id"><span>Item</span></th>
+                <th md-column md-numeric md-order-by="quantite"><span>Quantite</span></th>
+                <th md-column md-numeric md-order-by="total"><span>Total</span></th>
+              </tr>
+            </thead>
+            <tbody md-body>
+              <tr md-row md-select="item" md-select-id="{{order.id}}" md-auto-select ng-repeat="order in orders | filter: query.filter | orderBy: query.order">
+                <td md-cell>{{order.dt_order}}</md-cell>
+                <td md-cell>{{order.username}}</md-cell>
+                <td md-cell>{{order.item_id}}</md-cell>
+                <td md-cell>{{order.quantite}}</md-cell>
+                <td md-cell>{{order.total}}</md-cell>
+              </tr>
+            </tbody>
+          </table>
+        </md-table-container>
+
+
+
+      
+      
+    </md-content>
