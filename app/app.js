@@ -1,8 +1,10 @@
-angular.module('scrapApp', ['md.data.table', 'ngMaterial', 'ngResource', 'ngRoute'])
+angular.module('scrapApp', ['ngClipboard', 'md.data.table', 'ngMaterial', 'ngResource', 'ngRoute'])
 
-  .config(['$compileProvider', '$mdThemingProvider', '$routeProvider', function ($compileProvider, $mdThemingProvider, $routeProvider) {
+  .config(['ngClipProvider', '$compileProvider', '$mdThemingProvider', '$routeProvider', function (ngClipProvider, $compileProvider, $mdThemingProvider, $routeProvider) {
     'use strict';
     
+    ngClipProvider.setPath("../node_modules/zeroclipboard/dist/ZeroClipboard.swf");
+
     $compileProvider.debugInfoEnabled(false);
     
     $mdThemingProvider.theme('default')
