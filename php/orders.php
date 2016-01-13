@@ -6,8 +6,11 @@
     //open connection to mysql db
     $connection = mysqli_connect("localhost", $mysqluser, $mysqlpwd, "scrap") or die("Error " . mysqli_error($connection));
 
+
+    $poid = intval($_GET['poid']);
+
     //fetch table rows from mysql db
-    $sql = "select o.*, i.nom from orders o, items i where o.item_id = i.id";
+    $sql = "select o.*, i.nom from orders o, items i where o.item_id = i.id and po_id = $poid";
     $result = mysqli_query($connection, $sql) or die("Error in Selecting " . mysqli_error($connection));
 
     //create an array

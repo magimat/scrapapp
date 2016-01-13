@@ -1,5 +1,5 @@
 
-angular.module('scrapApp').controller('poController', ['$window', '$resource','$mdDialog', '$scope', function ($window, $resource,$mdDialog, $scope) {
+angular.module('scrapApp').controller('poController', ['$http', '$window', '$resource','$mdDialog', '$scope', function ($http, $window, $resource,$mdDialog, $scope) {
   'use strict';
   
   $scope.filter = [];
@@ -11,8 +11,31 @@ angular.module('scrapApp').controller('poController', ['$window', '$resource','$
   $scope.total = 0;
 
 
-  function getOrders(query) {
-    $scope.orders = $resource('http://www.scrapbookartetpassion.com/forum/admin/store/orders.php').query();
+  function getCurPO() {
+    $http({
+          url: 'http://www.scrapbookartetpassion.com/forum/admin/store/getCurrentPO.php', 
+          method: "GET",
+          params: {}
+        }).then(function successCallback(response) {
+            $scope.curpo = response.data;
+            console.log($scope.curpo.id)
+            getOrders();
+        }, function errorCallback(response) {
+            console.log('error!!!');
+        });
+  }
+
+  function getOrders() {
+    $http({
+          url: 'http://www.scrapbookartetpassion.com/forum/admin/store/orders.php', 
+          method: "GET",
+          params: {poid: $scope.curpo.id}
+        }).then(function successCallback(response) {
+            $scope.orders = response.data;
+            $scope.updateTotal($scope.order);
+        }, function errorCallback(response) {
+            console.log('error!!!');
+        });
   }
   
   
@@ -48,10 +71,21 @@ angular.module('scrapApp').controller('poController', ['$window', '$resource','$
   }
 
 
+  $scope.fermerPO = function() {
+    $http({
+          url: 'http://www.scrapbookartetpassion.com/forum/admin/store/closepo.php', 
+          method: "GET",
+          params: {poid: $scope.curpo.id}
+        }).then(function successCallback(response) {
+            getCurPO();
+        }, function errorCallback(response) {
+            console.log('error!!!');
+        });
+  }
+
   
-  
-getOrders();
-$scope.updateTotal($scope.order);
+getCurPO();
+
   
 
 
