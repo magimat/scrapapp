@@ -10,6 +10,17 @@ angular.module('scrapApp').controller('etatcompteController', ['$http', '$window
 
   $scope.total = 0;
 
+  $scope.edit = function (event) {
+    $mdDialog.show({
+      clickOutsideToClose: true,
+      controller: 'editFactureController',
+      controllerAs: 'ctrl',
+      focusOnOpen: false,
+      targetEvent: event,
+      locals: { item: $scope.selected[0] },
+      templateUrl: 'templates/edit-facture.html',
+    }).then(getItems);
+  };
 
 
   function getListeEtatCompte() {
