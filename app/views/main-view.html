@@ -1,0 +1,10 @@
+<section layout="row" layout-sm="column" layout-align="center center" layout-wrap>
+      <md-button md-no-ink class="md-primary">Items disponibles</md-button>
+      <md-button ng-click="gotoCommandes()">Commandes en cours</md-button>
+      <md-button ng-click="gotoEtatCompte()">États de compte</md-button>
+</section>
+
+
+<md-card ng-include="'templates/item-table.html'" ></md-card>
+
+
