@@ -7,7 +7,7 @@
     $connection = mysqli_connect("localhost", $mysqluser, $mysqlpwd, "scrap") or die("Error " . mysqli_error($connection));
 
     //fetch table rows from mysql db
-    $sql = "select * from orders";
+    $sql = "select o.*, i.nom from orders o, items i where o.item_id = i.id";
     $result = mysqli_query($connection, $sql) or die("Error in Selecting " . mysqli_error($connection));
 
     //create an array

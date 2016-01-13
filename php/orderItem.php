@@ -9,9 +9,12 @@
     $id = intval($_GET['id']);
     $poid = intval($_GET['poid']);
     $quantite = intval($_GET['quantite']);
+	$prixunit = floatval($_GET['prix']);
+	$total = $prixunit * $quantite;
 
 
-	mysqli_query($connection,"INSERT INTO `orders` (  `username` ,  `item_id` ,  `quantite` ,  `po_id` ,  `dt_order` )  VALUES ('$username', $id, $quantite, $poid, NOW())") or die(mysqli_error($connection));
+
+	mysqli_query($connection,"INSERT INTO `orders` (  `username` ,  `item_id` ,  `quantite` ,  `po_id` ,  `dt_order`, `total` )  VALUES ('$username', $id, $quantite, $poid, NOW(), $total)") or die(mysqli_error($connection));
 
     mysqli_close($connection);
 

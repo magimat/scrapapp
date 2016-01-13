@@ -1,50 +1,20 @@
 
-angular.module('scrapApp').controller('poController', ['$resource','$mdDialog', '$scope', function ($resource,$mdDialog, $scope) {
+angular.module('scrapApp').controller('poController', ['$window', '$resource','$mdDialog', '$scope', function ($window, $resource,$mdDialog, $scope) {
   'use strict';
   
-  $scope.selected = [];
-  $scope.selected.length = 0;
+  $scope.filter = [];
+  $scope.filter.show = false;
+
+  $scope.query = [];
+  $scope.query.filter = '';
+
+  $scope.total = 0;
+
 
   function getOrders(query) {
     $scope.orders = $resource('http://www.scrapbookartetpassion.com/forum/admin/store/orders.php').query();
-    $scope.selected.length = 0;
   }
   
-  $scope.addItem = function (event) {
-    $mdDialog.show({
-      clickOutsideToClose: true,
-      controller: 'addItemController',
-      controllerAs: 'ctrl',
-      focusOnOpen: false,
-      targetEvent: event,
-      templateUrl: 'templates/add-dialog.html',
-    }).then(getItems);
-  };
-
-  $scope.edit = function (event) {
-    $mdDialog.show({
-      clickOutsideToClose: true,
-      controller: 'editItemController',
-      controllerAs: 'ctrl',
-      focusOnOpen: false,
-      targetEvent: event,
-      locals: { item: $scope.selected[0] },
-      templateUrl: 'templates/edit-dialog.html',
-    }).then(getItems);
-  };
-
-  
-  $scope.delete = function (event) {
-    $mdDialog.show({
-      clickOutsideToClose: true,
-      controller: 'deleteController',
-      controllerAs: 'ctrl',
-      focusOnOpen: false,
-      targetEvent: event,
-      locals: { items: $scope.selected },
-      templateUrl: 'templates/delete-dialog.html',
-    }).then(getItems);
-  };
   
   $scope.removeFilter = function () {
     $scope.filter.show = false;
@@ -55,8 +25,33 @@ angular.module('scrapApp').controller('poController', ['$resource','$mdDialog', 
     }
   };
 
+  $scope.gotoItems = function () {
+    $window.location.href = '#/main';
+  }
+
+  $scope.gotoCommandes = function () {
+    $window.location.href = '#/viewpo';
+  }
+
+  $scope.gotoEtatCompte = function () {
+    $window.location.href = '#/etatcompte';
+  }
+
+
+  $scope.updateTotal = function(orders) {
+    var total = 0;
+    angular.forEach(orders, function(order) {
+      total = total + parseFloat(order.total);
+    });
+    $scope.total = total;
+    return orders;
+  }
+
+
+  
   
 getOrders();
+$scope.updateTotal($scope.order);
   
 
 

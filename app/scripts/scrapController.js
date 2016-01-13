@@ -1,5 +1,5 @@
 
-angular.module('scrapApp').controller('scrapController', ['$resource','$mdDialog', '$scope', function ($resource,$mdDialog, $scope) {
+angular.module('scrapApp').controller('scrapController', ['$window', '$resource','$mdDialog', '$scope', function ($window, $resource,$mdDialog, $scope) {
   'use strict';
   
   $scope.selected = [];
@@ -9,8 +9,6 @@ angular.module('scrapApp').controller('scrapController', ['$resource','$mdDialog
 
   $scope.query = [];
   $scope.query.filter = '';
-
-
 
   function getItems(query) {
     $scope.items = $resource('http://www.scrapbookartetpassion.com/forum/admin/store/items.php').query();
@@ -72,9 +70,21 @@ angular.module('scrapApp').controller('scrapController', ['$resource','$mdDialog
     }
   };
 
+  $scope.gotoItems = function () {
+    $window.location.href = '#/main';
+  }
+
+  $scope.gotoCommandes = function () {
+    $window.location.href = '#/viewpo';
+  }
+
+  $scope.gotoEtatCompte = function () {
+    $window.location.href = '#/etatcompte';
+  }
+
+
   
 getItems();
-  
 
 
 }]);

@@ -122,3 +122,8 @@ md-dialog[add-item-dialog] > md-dialog-content > form > .input-row > md-input-co
   font-style: italic;
 }
 
+.total {
+
+  padding: 2em;
+}
+

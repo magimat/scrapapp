@@ -11,13 +11,21 @@ angular.module('scrapApp', ['ngClipboard', 'md.data.table', 'ngMaterial', 'ngRes
       .primaryPalette('blue')
       .accentPalette('pink');
 
- 	$routeProvider.
+  $routeProvider.
       when('/viewpo', {
         templateUrl: 'views/viewpo.html',
         controller: 'poController'
       }).
+      when('/main', {
+        templateUrl: 'views/main-view.html',
+        controller: 'scrapController'
+      }).
       when('/gestion', {
         templateUrl: 'views/gestion_items.html',
+        controller: 'scrapController'
+      }).
+      when('/etatcompte', {
+        templateUrl: 'views/etatcompte.html',
         controller: 'scrapController'
       }).
       when('/order', {
@@ -33,7 +41,7 @@ angular.module('scrapApp', ['ngClipboard', 'md.data.table', 'ngMaterial', 'ngRes
         controller: 'orderController'
       }).
       otherwise({
-        redirectTo: '/gestion'
+        redirectTo: '/main'
       });
 
 

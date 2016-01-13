@@ -19,7 +19,7 @@ angular.module('scrapApp').controller('orderController', ['$window', '$location'
             $scope.item = response.data;
 
             if($scope.item.actif == 'non disponible') {
-                 $window.location.href = '/forum/admin/store/app/#/orderfail';
+                 $window.location.href = '#/orderfail';
             }
 
         }, function errorCallback(response) {
@@ -35,7 +35,7 @@ angular.module('scrapApp').controller('orderController', ['$window', '$location'
             $scope.curpo = response.data;
             console.log($scope.curpo)
         }, function errorCallback(response) {
-            $window.location.href = '/forum/admin/store/app/#/orderfail';
+            $window.location.href = '#/orderfail';
         });
 
 
@@ -45,11 +45,13 @@ angular.module('scrapApp').controller('orderController', ['$window', '$location'
         $http({
           url: 'http://www.scrapbookartetpassion.com/forum/admin/store/orderItem.php', 
           method: "GET",
-          params: {id: $scope.id, username: $scope.username, quantite: $scope.nbItems, poid: $scope.curpo.id}
+          params: {id: $scope.id, prix: $scope.item.prix, username: $scope.username, quantite: $scope.nbItems, poid: $scope.curpo.id}
         }).then(function successCallback(response) {
-           $window.location.href = '/forum/admin/store/app/#/ordersuccess';
+
+          console.log('ok')
+           $window.location.href = '#/ordersuccess';
         }, function errorCallback(response) {
-            $window.location.href = '/forum/admin/store/app/#/orderfail';
+            $window.location.href = '#/orderfail';
         });
 
   }

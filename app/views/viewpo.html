@@ -1,29 +1,57 @@
-    <md-toolbar>
-      <div class="md-toolbar-tools" layout-align="space-between">
-        <div class="md-title">Détail PO</div>
-      </div>
-    </md-toolbar>
-    
-    <md-content layout="column" flex>
-      
- 
+<section layout="row" layout-sm="column" layout-align="center center" layout-wrap>
+      <md-button ng-click="gotoItems()">Items disponibles</md-button>
+      <md-button md-no-ink class="md-primary">Commandes en cours</md-button>
+      <md-button ng-click="gotoEtatCompte()">États de compte</md-button>
+</section>
+
+
+
+
+
+<md-card>
+
+
+
+
+<md-toolbar class="md-table-toolbar md-default" ng-hide="selected.length || filter.show">
+  <div class="md-toolbar-tools">
+    <h2 class="md-title"></h2>
+    <div flex></div>
+    <md-button class="md-icon-button" ng-click="filter.show = true">
+      <md-icon>filter_list</md-icon>
+    </md-button>
+  </div>
+</md-toolbar>
+
+<md-toolbar class="md-table-toolbar md-default" ng-show="filter.show && !selected.length">
+  <div class="md-toolbar-tools">
+    <md-icon>search</md-icon>
+    <form flex name="filter.form">
+      <input type="text" ng-model="query.filter" placeholder="rechercher">
+    </form>
+    <md-button class="md-icon-button" ng-click="removeFilter()">
+      <md-icon>close</md-icon>
+    </md-button>
+  </div>
+</md-toolbar>
+
 
      <md-table-container>
-          <table md-table md-row-select ng-model="selected" md-progress="promise">
+          <table md-table ng-model="selected" md-progress="promise">
             <thead md-head md-order="query.order">
               <tr md-row>
                 <th md-column md-order-by="dt_order"><span>DATE</span></th>
                 <th md-column md-order-by="username"><span>User</span></th>
-                <th md-column md-order-by="item_id"><span>Item</span></th>
+                <th md-column md-order-by="nom"><span>Item</span></th>
                 <th md-column md-numeric md-order-by="quantite"><span>Quantite</span></th>
                 <th md-column md-numeric md-order-by="total"><span>Total</span></th>
               </tr>
             </thead>
             <tbody md-body>
-              <tr md-row md-select="item" md-select-id="{{order.id}}" md-auto-select ng-repeat="order in orders | filter: query.filter | orderBy: query.order">
+              <tr md-row ng-repeat="order in updateTotal((orders | filter: query.filter | orderBy: query.order))">
                 <td md-cell>{{order.dt_order}}</md-cell>
                 <td md-cell>{{order.username}}</md-cell>
-                <td md-cell>{{order.item_id}}</md-cell>
+                <td md-cell>{{order.nom}}</md-cell>
                 <td md-cell>{{order.quantite}}</md-cell>
                 <td md-cell>{{order.total}}</md-cell>
               </tr>
@@ -32,7 +60,6 @@
         </md-table-container>
 
 
+</md-card>
 
-      
-      
-    </md-content>
+<div class="total" layout="row" layout-align="end">Total: {{ total | currency}}</div>
