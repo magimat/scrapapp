@@ -26,7 +26,7 @@ angular.module('scrapApp', ['ngClipboard', 'md.data.table', 'ngMaterial', 'ngRes
       }).
       when('/etatcompte', {
         templateUrl: 'views/etatcompte.html',
-        controller: 'scrapController'
+        controller: 'etatcompteController'
       }).
       when('/order', {
         templateUrl: 'views/order.html',

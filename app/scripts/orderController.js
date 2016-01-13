@@ -1,5 +1,6 @@
 
 
+
 angular.module('scrapApp').controller('orderController', ['$window', '$location', '$mdDialog', '$http', '$scope', function ($window, $location, $mdDialog, $http, $scope) {
   'use strict';
 

@@ -6,4 +6,76 @@
 
 
 
-todo
+<md-card>
+
+  <section layout="row" layout-align="center center" layout-wrap>
+    <div layout="row" layout-align="center center" flex>
+      <md-select ng-change="changepo()" ng-model="curpoid">
+        <md-option ng-repeat="po in allpo" value="{{po.id}}">
+                {{po.dt_debut}} - {{po.dt_fin}}
+        </md-option>
+      </md-select>
+      <span flex></span>
+    </div>
+  </section>
+
+</md-card>
+
+<md-card>
+
+
+<md-toolbar class="md-table-toolbar md-default" ng-hide="selected.length || filter.show">
+  <div class="md-toolbar-tools">
+    <h2 class="md-title"></h2>
+    <div flex></div>
+    <md-button class="md-icon-button" ng-click="filter.show = true">
+      <md-icon>filter_list</md-icon>
+    </md-button>
+  </div>
+</md-toolbar>
+
+<md-toolbar class="md-table-toolbar md-default" ng-show="filter.show && !selected.length">
+  <div class="md-toolbar-tools">
+    <md-icon>search</md-icon>
+    <form flex name="filter.form">
+      <input type="text" ng-model="query.filter" placeholder="rechercher">
+    </form>
+    <md-button class="md-icon-button" ng-click="removeFilter()">
+      <md-icon>close</md-icon>
+    </md-button>
+  </div>
+</md-toolbar>
+
+
+     <md-table-container>
+          <table md-table ng-model="selected" md-progress="promise">
+            <thead md-head md-order="query.order">
+              <tr md-row>
+                <th md-column md-order-by="username"><span>User</span></th>
+                <th md-column md-numeric md-order-by="total"><span>Total</span></th>
+                <th md-column md-numeric md-order-by="recu"><span>Montant reçu</span></th>
+                <th md-column md-numeric md-order-by="balance"><span>Balance à recevoir</span></th>
+              </tr>
+            </thead>
+            <tbody md-body>
+              <tr md-row ng-repeat="facture in updateTotal((factures | filter: query.filter | orderBy: query.order))">
+                <td md-cell>{{facture.username}}</md-cell>
+                <td md-cell>{{facture.total}}</md-cell>
+                <td md-cell>{{facture.recu}}</md-cell>
+                <td md-cell>{{facture.balance}}</md-cell>
+              </tr>
+            </tbody>
+          </table>
+        </md-table-container>
+
+
+</md-card>
+
+
+<section layout="row" layout-sm="column" layout-align="end center" layout-wrap>
+  <div layout="row" layout-align="start center" flex>
+    <md-button class="md-raised md-primary" layout-align="start" ng-click="sendInvoice()">Envoyer les factures</md-button>
+    <span flex></span>
+  </div>
+  <div class="total">Total à recevoir: {{ total | currency}}</div>
+</section>

@@ -77,7 +77,40 @@ angular.module('scrapApp').controller('poController', ['$http', '$window', '$res
           method: "GET",
           params: {poid: $scope.curpo.id}
         }).then(function successCallback(response) {
+            genEtatCompte();
+            $scope.gotoEtatCompte();
+        }, function errorCallback(response) {
+            console.log('error!!!');
+        });
+  }
+
+
+  function genEtatCompte() {
+    $http({
+          url: 'http://www.scrapbookartetpassion.com/forum/admin/store/getFactureData.php', 
+          method: "GET",
+          params: {poid: $scope.curpo.id}
+        }).then(function successCallback(response) {
+            var totaux = response.data;
+
+            angular.forEach(totaux, function(total) {
+              insertEtatCompte(total);
+            });
+
+
             getCurPO();
+        }, function errorCallback(response) {
+            console.log('error!!!');
+        });
+  }
+
+  function insertEtatCompte(total) {
+    $http({
+          url: 'http://www.scrapbookartetpassion.com/forum/admin/store/insertEtatCompte.php', 
+          method: "GET",
+          params: {poid: $scope.curpo.id, username: total.username, total: total.total}
+        }).then(function successCallback(response) {
+
         }, function errorCallback(response) {
             console.log('error!!!');
         });
