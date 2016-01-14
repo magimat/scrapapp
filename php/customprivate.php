@@ -20,10 +20,10 @@ $templatelist .= ",private_archive,private_quickreply,private_pmspace,private_li
 $templatelist .= ",private_archive_folders_folder,private_archive_folders,postbit_warninglevel,postbit_author_user,postbit_reply_pm,postbit_forward_pm,private_messagebit_icon,private_jump_folders_folder,private_advanced_search_folders";
 $templatelist .= ",private_jump_folders,postbit_avatar,postbit_warn,postbit_rep_button,postbit_email,postbit_reputation,private_move,private_read_action,postbit_away,postbit_pm,usercp_nav_messenger_tracking,postbit_find,private_emptyexportlink";
 
-require_once "./global.php";
-require_once MYBB_ROOT."inc/functions_post.php";
-require_once MYBB_ROOT."inc/functions_user.php";
-require_once MYBB_ROOT."inc/class_parser.php";
+require_once "../forum/global.php";
+require_once MYBB_ROOT."../forum/inc/functions_post.php";
+require_once MYBB_ROOT."../forum/inc/functions_user.php";
+require_once MYBB_ROOT."../forum/inc/class_parser.php";
 $parser = new postParser;
 
 // Load global language phrases
@@ -55,7 +55,7 @@ $to = array_map("trim", explode(",", $touser));
 
 
 
-require_once MYBB_ROOT."inc/datahandlers/pm.php";
+require_once MYBB_ROOT."../forum/inc/datahandlers/pm.php";
 $pmhandler = new PMDataHandler();
 
 

@@ -20,6 +20,10 @@ angular.module('scrapApp', ['ngClipboard', 'md.data.table', 'ngMaterial', 'ngRes
         templateUrl: 'views/main-view.html',
         controller: 'scrapController'
       }).
+      when('/userorder', {
+        templateUrl: 'views/userorder.html',
+        controller: 'userorderController'
+      }).
       when('/gestion', {
         templateUrl: 'views/gestion_items.html',
         controller: 'scrapController'

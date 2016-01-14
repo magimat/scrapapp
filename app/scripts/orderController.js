@@ -13,7 +13,7 @@ angular.module('scrapApp').controller('orderController', ['$window', '$location'
 
 
   $http({
-          url: 'http://www.scrapbookartetpassion.com/forum/admin/store/getItem.php', 
+          url: 'http://www.scrapbookartetpassion.com/scrapapp/getItem.php', 
           method: "GET",
           params: {id: $scope.id}
         }).then(function successCallback(response) {
@@ -29,7 +29,7 @@ angular.module('scrapApp').controller('orderController', ['$window', '$location'
 
 
   $http({
-          url: 'http://www.scrapbookartetpassion.com/forum/admin/store/getCurrentPO.php', 
+          url: 'http://www.scrapbookartetpassion.com/scrapapp/getCurrentPO.php', 
           method: "GET",
           params: {}
         }).then(function successCallback(response) {
@@ -44,7 +44,7 @@ angular.module('scrapApp').controller('orderController', ['$window', '$location'
   $scope.orderItem = function () {
      
         $http({
-          url: 'http://www.scrapbookartetpassion.com/forum/admin/store/orderItem.php', 
+          url: 'http://www.scrapbookartetpassion.com/scrapapp/orderItem.php', 
           method: "GET",
           params: {id: $scope.id, prix: $scope.item.prix, username: $scope.username, quantite: $scope.nbItems, poid: $scope.curpo.id}
         }).then(function successCallback(response) {

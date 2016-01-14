@@ -15,7 +15,7 @@ angular.module('scrapApp').controller('editItemController', ['$mdDialog', 'item'
     if($scope.item.form.$valid) {
      
         $http({
-          url: 'http://www.scrapbookartetpassion.com/forum/admin/store/editItem.php', 
+          url: 'http://www.scrapbookartetpassion.com/scrapapp/editItem.php', 
           method: "GET",
           params: {id: $scope.item.id, nom: $scope.item.nom, actif: $scope.item.actif, prix: $scope.item.prix, compagnie: $scope.item.compagnie}
         }).then(function successCallback(response) {

@@ -2,6 +2,9 @@
 angular.module('scrapApp').controller('etatcompteController', ['$http', '$window', '$resource','$mdDialog', '$scope', function ($http, $window, $resource,$mdDialog, $scope) {
   'use strict';
   
+  $scope.selected = [];
+  $scope.selected.length = 0;
+  
   $scope.filter = [];
   $scope.filter.show = false;
 
@@ -17,15 +20,15 @@ angular.module('scrapApp').controller('etatcompteController', ['$http', '$window
       controllerAs: 'ctrl',
       focusOnOpen: false,
       targetEvent: event,
-      locals: { item: $scope.selected[0] },
+      locals: { facture: $scope.selected[0] },
       templateUrl: 'templates/edit-facture.html',
-    }).then(getItems);
+    }).then(getEtatCompte);
   };
 
 
   function getListeEtatCompte() {
     $http({
-          url: 'http://www.scrapbookartetpassion.com/forum/admin/store/getAllPo.php', 
+          url: 'http://www.scrapbookartetpassion.com/scrapapp/getAllPo.php', 
           method: "GET",
           params: {}
         }).then(function successCallback(response) {
@@ -40,7 +43,7 @@ angular.module('scrapApp').controller('etatcompteController', ['$http', '$window
 
   function getEtatCompte() {
     $http({
-          url: 'http://www.scrapbookartetpassion.com/forum/admin/store/getEtatCompte.php', 
+          url: 'http://www.scrapbookartetpassion.com/scrapapp/getEtatCompte.php', 
           method: "GET",
           params: {poid: $scope.curpoid}
         }).then(function successCallback(response) {

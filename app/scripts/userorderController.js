@@ -1,5 +1,5 @@
 
-angular.module('scrapApp').controller('poController', ['$http', '$window', '$resource','$mdDialog', '$scope', function ($http, $window, $resource,$mdDialog, $scope) {
+angular.module('scrapApp').controller('userorderController', ['$location', '$http', '$window', '$resource','$mdDialog', '$scope', function ($location, $http, $window, $resource,$mdDialog, $scope) {
   'use strict';
   
   $scope.filter = [];
@@ -9,6 +9,8 @@ angular.module('scrapApp').controller('poController', ['$http', '$window', '$res
   $scope.query.filter = '';
 
   $scope.total = 0;
+
+  $scope.user = $location.search().user
 
 
 function getListePO() {
@@ -58,9 +60,9 @@ function getListePO() {
   function getOrders() {
 
     $http({
-          url: 'http://www.scrapbookartetpassion.com/scrapapp/orders.php', 
+          url: 'http://www.scrapbookartetpassion.com/scrapapp/userorders.php', 
           method: "GET",
-          params: {poid: $scope.selectedpo}
+          params: {poid: $scope.selectedpo, user: $scope.user}
         }).then(function successCallback(response) {
             $scope.orders = response.data;
             $scope.updateTotal($scope.order);

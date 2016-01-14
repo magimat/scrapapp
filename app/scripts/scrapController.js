@@ -11,7 +11,7 @@ angular.module('scrapApp').controller('scrapController', ['$window', '$resource'
   $scope.query.filter = '';
 
   function getItems(query) {
-    $scope.items = $resource('http://www.scrapbookartetpassion.com/forum/admin/store/items.php').query();
+    $scope.items = $resource('http://www.scrapbookartetpassion.com/scrapapp/items.php').query();
     $scope.selected.length = 0;
   }
   
@@ -30,7 +30,7 @@ angular.module('scrapApp').controller('scrapController', ['$window', '$resource'
 
   $scope.getTextToCopy = function() {
     alert("L'url pour commander l'item sélectionné est prête à coller dans le forum!");
-    return 'http://scrapbookartetpassion.com/forum/admin/store/app/#/order?id=' + $scope.selected[0].id
+    return 'http://scrapbookartetpassion.com/scrapapp/app/#/order?id=' + $scope.selected[0].id
   }
 
 

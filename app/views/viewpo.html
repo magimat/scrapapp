@@ -1,11 +1,29 @@
 <section layout="row" layout-sm="column" layout-align="center center" layout-wrap>
       <md-button ng-click="gotoItems()">Items disponibles</md-button>
-      <md-button md-no-ink class="md-primary">Commande en cours</md-button>
+      <md-button md-no-ink class="md-primary">Commandes</md-button>
       <md-button ng-click="gotoEtatCompte()">États de compte</md-button>
 </section>
 
 
 
+<md-card>
+
+  <section layout="row" layout-align="center center" layout-wrap>
+    <div layout="row" layout-align="center center" flex>
+
+      <md-select ng-change="changepo()" ng-model="selectedpo">
+
+        <md-option ng-repeat="po in allpo" value="{{po.id}}">
+                {{po.dt_debut}} - {{po.dt_fin}}
+        </md-option>
+
+       
+      </md-select>
+      <span flex></span>
+    </div>
+  </section>
+
+</md-card>
 
 
 <md-card>
@@ -65,7 +83,7 @@
 
 <section layout="row" layout-sm="column" layout-align="end center" layout-wrap>
   <div layout="row" layout-align="start center" flex>
-    <md-button class="md-raised md-primary" layout-align="start" ng-click="fermerPO()">Fermer cette commande</md-button>
+    <md-button ng-show="selectedpo == curpo.id"  class="md-raised md-primary" layout-align="start" ng-click="fermerPO()">Fermer cette commande</md-button>
     <span flex></span>
   </div>
   <div class="total">Total: {{ total | currency}}</div>
