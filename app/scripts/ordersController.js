@@ -1,5 +1,5 @@
 
-angular.module('scrapApp').controller('poController', ['$http', '$window', '$resource','$mdDialog', '$scope', function ($http, $window, $resource,$mdDialog, $scope) {
+angular.module('scrapApp').controller('ordersController', ['apiBaseUrl', '$http', '$window', '$resource','$mdDialog', '$scope', function (apiBaseUrl, $http, $window, $resource,$mdDialog, $scope) {
   'use strict';
   
   $scope.filter = [];
@@ -13,7 +13,7 @@ angular.module('scrapApp').controller('poController', ['$http', '$window', '$res
 
 function getListePO() {
     $http({
-          url: 'http://www.scrapbookartetpassion.com/scrapapp/getAllPo.php', 
+          url: apiBaseUrl + 'getAllPo.php', 
           method: "GET",
           params: {}
         }).then(function successCallback(response) {
@@ -28,7 +28,7 @@ function getListePO() {
 
   function getCurPO() {
     $http({
-          url: 'http://www.scrapbookartetpassion.com/scrapapp/getCurrentPO.php', 
+          url: apiBaseUrl + 'getCurrentPO.php', 
           method: "GET",
           params: {}
         }).then(function successCallback(response) {
@@ -45,12 +45,38 @@ function getListePO() {
   }
 
 
-  $scope.changepo = function() {
-  
+  function genEtatCompte() {
+    $http({
+          url: apiBaseUrl + 'getFactureData.php', 
+          method: "GET",
+          params: {poid: $scope.curpo.id}
+        }).then(function successCallback(response) {
+            var totaux = response.data;
 
-    getOrders();
+            angular.forEach(totaux, function(total) {
+              insertEtatCompte(total);
+            });
+
+
+            getCurPO();
+        }, function errorCallback(response) {
+            console.log('error!!!');
+        });
   }
 
+  function insertEtatCompte(total) {
+    $http({
+          url: apiBaseUrl + 'insertEtatCompte.php', 
+          method: "GET",
+          params: {poid: $scope.curpo.id, username: total.username, total: total.total}
+        }).then(function successCallback(response) {
+
+        }, function errorCallback(response) {
+            console.log('error!!!');
+        });
+  }
+
+ 
 
 
 
@@ -58,7 +84,7 @@ function getListePO() {
   function getOrders() {
 
     $http({
-          url: 'http://www.scrapbookartetpassion.com/scrapapp/orders.php', 
+          url: apiBaseUrl + 'orders.php', 
           method: "GET",
           params: {poid: $scope.selectedpo}
         }).then(function successCallback(response) {
@@ -79,17 +105,7 @@ function getListePO() {
     }
   };
 
-  $scope.gotoItems = function () {
-    $window.location.href = '#/main';
-  }
 
-  $scope.gotoCommandes = function () {
-    $window.location.href = '#/viewpo';
-  }
-
-  $scope.gotoEtatCompte = function () {
-    $window.location.href = '#/etatcompte';
-  }
 
 
   $scope.updateTotal = function(orders) {
@@ -104,7 +120,7 @@ function getListePO() {
 
   $scope.fermerPO = function() {
     $http({
-          url: 'http://www.scrapbookartetpassion.com/scrapapp/closepo.php', 
+          url: apiBaseUrl + 'closepo.php', 
           method: "GET",
           params: {poid: $scope.curpo.id}
         }).then(function successCallback(response) {
@@ -116,35 +132,23 @@ function getListePO() {
   }
 
 
-  function genEtatCompte() {
-    $http({
-          url: 'http://www.scrapbookartetpassion.com/scrapapp/getFactureData.php', 
-          method: "GET",
-          params: {poid: $scope.curpo.id}
-        }).then(function successCallback(response) {
-            var totaux = response.data;
-
-            angular.forEach(totaux, function(total) {
-              insertEtatCompte(total);
-            });
-
-
-            getCurPO();
-        }, function errorCallback(response) {
-            console.log('error!!!');
-        });
+ $scope.changepo = function() {
+ 
+    getOrders();
   }
 
-  function insertEtatCompte(total) {
-    $http({
-          url: 'http://www.scrapbookartetpassion.com/scrapapp/insertEtatCompte.php', 
-          method: "GET",
-          params: {poid: $scope.curpo.id, username: total.username, total: total.total}
-        }).then(function successCallback(response) {
 
-        }, function errorCallback(response) {
-            console.log('error!!!');
-        });
+
+  $scope.gotoItems = function () {
+    $window.location.href = '#/items';
+  }
+
+  $scope.gotoCommandes = function () {
+    $window.location.href = '#/orders';
+  }
+
+  $scope.gotoEtatsCompte = function () {
+    $window.location.href = '#/etatsCompte';
   }
 
   

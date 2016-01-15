@@ -1,6 +1,6 @@
 
 
-angular.module('scrapApp').controller('addItemController', ['$mdDialog', '$http', '$scope', function ($mdDialog, $http, $scope) {
+angular.module('scrapApp').controller('addItemController', ['apiBaseUrl', '$mdDialog', '$http', '$scope', function (apiBaseUrl, $mdDialog, $http, $scope) {
   'use strict';
 
   this.cancel = $mdDialog.cancel;
@@ -15,11 +15,10 @@ angular.module('scrapApp').controller('addItemController', ['$mdDialog', '$http'
     if($scope.item.form.$valid) {
      
         $http({
-          url: 'http://www.scrapbookartetpassion.com/scrapapp/addItem.php', 
+          url: apiBaseUrl + 'addItem.php', 
           method: "GET",
           params: {nom: $scope.item.nom, actif: $scope.item.actif, prix: $scope.item.prix, compagnie: $scope.item.compagnie}
         }).then(function successCallback(response) {
-            console.log(response)
             $mdDialog.hide();
         }, function errorCallback(response) {
             console.log(response)

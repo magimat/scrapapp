@@ -1,23 +1,18 @@
 <section layout="row" layout-sm="column" layout-align="center center" layout-wrap>
       <md-button ng-click="gotoItems()">Items disponibles</md-button>
-      <md-button md-no-ink class="md-primary">Commandes</md-button>
-      <md-button ng-click="gotoEtatCompte()">États de compte</md-button>
+      <md-button ng-click="gotoCommandes()">Commandes</md-button>
+      <md-button md-no-ink class="md-primary">États de compte</md-button>
 </section>
-
 
 
 <md-card>
 
   <section layout="row" layout-align="center center" layout-wrap>
     <div layout="row" layout-align="center center" flex>
-
-      <md-select ng-change="changepo()" ng-model="selectedpo">
-
+      <md-select ng-change="changepo()" ng-model="curpoid">
         <md-option ng-repeat="po in allpo" value="{{po.id}}">
                 {{po.dt_debut}} - {{po.dt_fin}}
         </md-option>
-
-       
       </md-select>
       <span flex></span>
     </div>
@@ -25,10 +20,7 @@
 
 </md-card>
 
-
 <md-card>
-
-
 
 
 <md-toolbar class="md-table-toolbar md-default" ng-hide="selected.length || filter.show">
@@ -53,25 +45,35 @@
   </div>
 </md-toolbar>
 
+<md-toolbar class="md-table-toolbar alternate" ng-show="selected.length">
+  <div class="md-toolbar-tools" layout-align="space-between">
+    <div>{{selected.length}} {{selected.length > 1 ? 'items' : 'item'}} selected</div>
+
+    <div flex></div>
+
+    <md-button ng-show="selected.length == 1" class="md-icon-button" ng-click="edit($event)">
+      <md-icon>edit</md-icon>
+    </md-button>
+  </div>
+</md-toolbar>
+
 
      <md-table-container>
-          <table md-table ng-model="selected" md-progress="promise">
+          <table md-row-select md-table ng-model="selected" md-progress="promise">
             <thead md-head md-order="query.order">
               <tr md-row>
-                <th md-column md-order-by="dt_order"><span>DATE</span></th>
                 <th md-column md-order-by="username"><span>User</span></th>
-                <th md-column md-order-by="nom"><span>Item</span></th>
-                <th md-column md-numeric md-order-by="quantite"><span>Quantite</span></th>
                 <th md-column md-numeric md-order-by="total"><span>Total</span></th>
+                <th md-column md-numeric md-order-by="recu"><span>Montant reçu</span></th>
+                <th md-column md-numeric md-order-by="balance"><span>Balance à recevoir</span></th>
               </tr>
             </thead>
             <tbody md-body>
-              <tr md-row ng-repeat="order in updateTotal((orders | filter: query.filter | orderBy: query.order))">
-                <td md-cell>{{order.dt_order}}</md-cell>
-                <td md-cell>{{order.username}}</md-cell>
-                <td md-cell>{{order.nom}}</md-cell>
-                <td md-cell>{{order.quantite}}</md-cell>
-                <td md-cell>{{order.total}}</md-cell>
+              <tr md-row md-select="facture" md-select-id="{{facture.id}}" md-auto-select ng-repeat="facture in updateTotal((factures | filter: query.filter | orderBy: query.order))">
+                <td md-cell>{{facture.username}}</md-cell>
+                <td md-cell>{{facture.total}}</md-cell>
+                <td md-cell>{{facture.recu}}</md-cell>
+                <td md-cell>{{facture.balance}}</md-cell>
               </tr>
             </tbody>
           </table>
@@ -83,11 +85,8 @@
 
 <section layout="row" layout-sm="column" layout-align="end center" layout-wrap>
   <div layout="row" layout-align="start center" flex>
-    <md-button ng-show="selectedpo == curpo.id"  class="md-raised md-primary" layout-align="start" ng-click="fermerPO()">Fermer cette commande</md-button>
+    <md-button class="md-raised md-primary" layout-align="start" ng-click="sendInvoice()">Envoyer les factures</md-button>
     <span flex></span>
   </div>
-  <div class="total">Total: {{ total | currency}}</div>
+  <div class="total">Total à recevoir: {{ total | currency}}</div>
 </section>
-
-
-

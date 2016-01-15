@@ -1,5 +1,5 @@
 
-angular.module('scrapApp').controller('userorderController', ['$location', '$http', '$window', '$resource','$mdDialog', '$scope', function ($location, $http, $window, $resource,$mdDialog, $scope) {
+angular.module('scrapApp').controller('userOrderController', ['apiBaseUrl', '$location', '$http', '$window', '$resource','$mdDialog', '$scope', function (apiBaseUrl, $location, $http, $window, $resource,$mdDialog, $scope) {
   'use strict';
   
   $scope.filter = [];
@@ -15,7 +15,7 @@ angular.module('scrapApp').controller('userorderController', ['$location', '$htt
 
 function getListePO() {
     $http({
-          url: 'http://www.scrapbookartetpassion.com/scrapapp/getAllPo.php', 
+          url: apiBaseUrl + 'getAllPo.php', 
           method: "GET",
           params: {}
         }).then(function successCallback(response) {
@@ -30,7 +30,7 @@ function getListePO() {
 
   function getCurPO() {
     $http({
-          url: 'http://www.scrapbookartetpassion.com/scrapapp/getCurrentPO.php', 
+          url: apiBaseUrl + 'getCurrentPO.php', 
           method: "GET",
           params: {}
         }).then(function successCallback(response) {
@@ -60,7 +60,7 @@ function getListePO() {
   function getOrders() {
 
     $http({
-          url: 'http://www.scrapbookartetpassion.com/scrapapp/userorders.php', 
+          url: apiBaseUrl + 'userorders.php', 
           method: "GET",
           params: {poid: $scope.selectedpo, user: $scope.user}
         }).then(function successCallback(response) {
@@ -106,7 +106,7 @@ function getListePO() {
 
   $scope.fermerPO = function() {
     $http({
-          url: 'http://www.scrapbookartetpassion.com/scrapapp/closepo.php', 
+          url: apiBaseUrl + 'closepo.php', 
           method: "GET",
           params: {poid: $scope.curpo.id}
         }).then(function successCallback(response) {
@@ -120,7 +120,7 @@ function getListePO() {
 
   function genEtatCompte() {
     $http({
-          url: 'http://www.scrapbookartetpassion.com/scrapapp/getFactureData.php', 
+          url: apiBaseUrl + 'getFactureData.php', 
           method: "GET",
           params: {poid: $scope.curpo.id}
         }).then(function successCallback(response) {
@@ -139,7 +139,7 @@ function getListePO() {
 
   function insertEtatCompte(total) {
     $http({
-          url: 'http://www.scrapbookartetpassion.com/scrapapp/insertEtatCompte.php', 
+          url: apiBaseUrl + 'insertEtatCompte.php', 
           method: "GET",
           params: {poid: $scope.curpo.id, username: total.username, total: total.total}
         }).then(function successCallback(response) {

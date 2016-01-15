@@ -1,6 +1,6 @@
 
 
-angular.module('scrapApp').controller('deleteController', ['$mdDialog', 'items', '$scope', '$http', function ($mdDialog, items, $scope, $http) {
+angular.module('scrapApp').controller('deleteItemController', ['apiBaseUrl', '$mdDialog', 'items', '$scope', '$http', function (apiBaseUrl, $mdDialog, items, $scope, $http) {
   'use strict';
   
   this.cancel = $mdDialog.cancel;
@@ -9,7 +9,7 @@ angular.module('scrapApp').controller('deleteController', ['$mdDialog', 'items',
   function deleteItem(item) {
 
     $http({
-          url: 'http://www.scrapbookartetpassion.com/scrapapp/deleteItem.php', 
+          url: apiBaseUrl + 'deleteItem.php', 
           method: "GET",
           params: {id: item.id}
         }).then(function successCallback(response) {

@@ -1,4 +1,4 @@
-angular.module('scrapApp', ['ngClipboard', 'md.data.table', 'ngMaterial', 'ngResource', 'ngRoute'])
+var app = angular.module('scrapApp', ['ngClipboard', 'md.data.table', 'ngMaterial', 'ngResource', 'ngRoute'])
 
   .config(['ngClipProvider', '$compileProvider', '$mdThemingProvider', '$routeProvider', function (ngClipProvider, $compileProvider, $mdThemingProvider, $routeProvider) {
     'use strict';
@@ -11,43 +11,40 @@ angular.module('scrapApp', ['ngClipboard', 'md.data.table', 'ngMaterial', 'ngRes
       .primaryPalette('blue')
       .accentPalette('pink');
 
-  $routeProvider.
-      when('/viewpo', {
-        templateUrl: 'views/viewpo.html',
-        controller: 'poController'
-      }).
-      when('/main', {
-        templateUrl: 'views/main-view.html',
-        controller: 'scrapController'
-      }).
-      when('/userorder', {
-        templateUrl: 'views/userorder.html',
-        controller: 'userorderController'
-      }).
-      when('/gestion', {
-        templateUrl: 'views/gestion_items.html',
-        controller: 'scrapController'
-      }).
-      when('/etatcompte', {
-        templateUrl: 'views/etatcompte.html',
-        controller: 'etatcompteController'
-      }).
-      when('/order', {
-        templateUrl: 'views/order.html',
-        controller: 'orderController'
-      }).
-      when('/ordersuccess', {
-        templateUrl: 'views/ordersuccess.html',
-        controller: 'orderController'
-      }).
-      when('/orderfail', {
-        templateUrl: 'views/orderfail.html',
-        controller: 'orderController'
-      }).
-      otherwise({
-        redirectTo: '/main'
-      });
-
-
+    $routeProvider.
+        when('/items', {
+          templateUrl: 'views/items.html',
+          controller: 'itemsController'
+        }).
+        when('/orders', {
+          templateUrl: 'views/orders.html',
+          controller: 'ordersController'
+        }).
+        when('/etatsCompte', {
+          templateUrl: 'views/etatsCompte.html',
+          controller: 'etatsCompteController'
+        }).
+        when('/userOrders', {
+          templateUrl: 'views/userOrders.html',
+          controller: 'userOrdersController'
+        }).
+        when('/orderForm', {
+          templateUrl: 'views/orderForm.html',
+          controller: 'orderFormController'
+        }).
+        when('/orderFormSuccess', {
+          templateUrl: 'views/orderFormsuccess.html',
+          controller: 'orderFormController'
+        }).
+        when('/orderFormFail', {
+          templateUrl: 'views/orderFormfail.html',
+          controller: 'orderFormController'
+        }).
+        otherwise({
+          redirectTo: '/items'
+        });
 
   }]);
+
+
+app.constant('apiBaseUrl', 'http://www.scrapbookartetpassion.com/scrapapp/');

@@ -1,5 +1,5 @@
 
-angular.module('scrapApp').controller('etatcompteController', ['$http', '$window', '$resource','$mdDialog', '$scope', function ($http, $window, $resource,$mdDialog, $scope) {
+angular.module('scrapApp').controller('etatsCompteController', ['apiBaseUrl', '$http', '$window', '$resource','$mdDialog', '$scope', function (apiBaseUrl, $http, $window, $resource,$mdDialog, $scope) {
   'use strict';
   
   $scope.selected = [];
@@ -13,22 +13,12 @@ angular.module('scrapApp').controller('etatcompteController', ['$http', '$window
 
   $scope.total = 0;
 
-  $scope.edit = function (event) {
-    $mdDialog.show({
-      clickOutsideToClose: true,
-      controller: 'editFactureController',
-      controllerAs: 'ctrl',
-      focusOnOpen: false,
-      targetEvent: event,
-      locals: { facture: $scope.selected[0] },
-      templateUrl: 'templates/edit-facture.html',
-    }).then(getEtatCompte);
-  };
+
 
 
   function getListeEtatCompte() {
     $http({
-          url: 'http://www.scrapbookartetpassion.com/scrapapp/getAllPo.php', 
+          url: apiBaseUrl + 'getAllPo.php', 
           method: "GET",
           params: {}
         }).then(function successCallback(response) {
@@ -43,7 +33,7 @@ angular.module('scrapApp').controller('etatcompteController', ['$http', '$window
 
   function getEtatCompte() {
     $http({
-          url: 'http://www.scrapbookartetpassion.com/scrapapp/getEtatCompte.php', 
+          url: apiBaseUrl + 'getEtatCompte.php', 
           method: "GET",
           params: {poid: $scope.curpoid}
         }).then(function successCallback(response) {
@@ -54,6 +44,18 @@ angular.module('scrapApp').controller('etatcompteController', ['$http', '$window
   }
 
 
+
+  $scope.edit = function (event) {
+    $mdDialog.show({
+      clickOutsideToClose: true,
+      controller: 'editFactureController',
+      controllerAs: 'ctrl',
+      focusOnOpen: false,
+      targetEvent: event,
+      locals: { facture: $scope.selected[0] },
+      templateUrl: 'templates/edit-facture.html',
+    }).then(getEtatCompte);
+  };
   
   $scope.removeFilter = function () {
     $scope.filter.show = false;
@@ -64,17 +66,7 @@ angular.module('scrapApp').controller('etatcompteController', ['$http', '$window
     }
   };
 
-  $scope.gotoItems = function () {
-    $window.location.href = '#/main';
-  }
 
-  $scope.gotoCommandes = function () {
-    $window.location.href = '#/viewpo';
-  }
-
-  $scope.gotoEtatCompte = function () {
-    $window.location.href = '#/etatcompte';
-  }
 
 
   $scope.updateTotal = function(orders) {
@@ -88,12 +80,25 @@ angular.module('scrapApp').controller('etatcompteController', ['$http', '$window
 
 
   $scope.changepo = function() {
-  
 
     getEtatCompte();
   }
 
   
+  $scope.gotoItems = function () {
+    $window.location.href = '#/items';
+  }
+
+  $scope.gotoCommandes = function () {
+    $window.location.href = '#/orders';
+  }
+
+  $scope.gotoEtatsCompte = function () {
+    $window.location.href = '#/etatsCompte';
+  }
+
+
+
 getListeEtatCompte();
 
   

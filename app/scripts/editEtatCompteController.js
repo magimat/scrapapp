@@ -1,6 +1,6 @@
 
 
-angular.module('scrapApp').controller('editFactureController', ['$mdDialog', 'facture', '$http', '$scope', function ($mdDialog, facture, $http, $scope) {
+angular.module('scrapApp').controller('editEtatCompteController', ['apiBaseUrl', '$mdDialog', 'facture', '$http', '$scope', function (apiBaseUrl, $mdDialog, facture, $http, $scope) {
   'use strict';
 
   this.cancel = $mdDialog.cancel;
@@ -14,10 +14,8 @@ angular.module('scrapApp').controller('editFactureController', ['$mdDialog', 'fa
     
     if($scope.facture.form.$valid) {
     
-console.log('aaa')
-
         $http({
-          url: 'http://www.scrapbookartetpassion.com/scrapapp/editFacture.php', 
+          url: apiBaseUrl + 'editFacture.php', 
           method: "GET",
           params: {id: $scope.facture.id, recu: $scope.facture.recu, balance: ($scope.facture.total - $scope.facture.recu)}
         }).then(function successCallback(response) {

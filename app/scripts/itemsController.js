@@ -1,5 +1,5 @@
 
-angular.module('scrapApp').controller('scrapController', ['$window', '$resource','$mdDialog', '$scope', function ($window, $resource,$mdDialog, $scope) {
+angular.module('scrapApp').controller('itemsController', ['apiBaseUrl', '$window', '$resource','$mdDialog', '$scope', function (apiBaseUrl, $window, $resource,$mdDialog, $scope) {
   'use strict';
   
   $scope.selected = [];
@@ -11,7 +11,7 @@ angular.module('scrapApp').controller('scrapController', ['$window', '$resource'
   $scope.query.filter = '';
 
   function getItems(query) {
-    $scope.items = $resource('http://www.scrapbookartetpassion.com/scrapapp/items.php').query();
+    $scope.items = $resource(apiBaseUrl + 'items.php').query();
     $scope.selected.length = 0;
   }
   
@@ -71,15 +71,15 @@ angular.module('scrapApp').controller('scrapController', ['$window', '$resource'
   };
 
   $scope.gotoItems = function () {
-    $window.location.href = '#/main';
+    $window.location.href = '#/items';
   }
 
   $scope.gotoCommandes = function () {
-    $window.location.href = '#/viewpo';
+    $window.location.href = '#/orders';
   }
 
-  $scope.gotoEtatCompte = function () {
-    $window.location.href = '#/etatcompte';
+  $scope.gotoEtatsCompte = function () {
+    $window.location.href = '#/etatsCompte';
   }
 
 
