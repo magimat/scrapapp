@@ -53,7 +53,7 @@ angular.module('scrapApp').controller('etatsCompteController', ['apiBaseUrl', '$
       focusOnOpen: false,
       targetEvent: event,
       locals: { facture: $scope.selected[0] },
-      templateUrl: 'templates/edit-facture.html',
+      templateUrl: 'dialogs/editEtatCompteDialog.html',
     }).then(getEtatCompte);
   };
   

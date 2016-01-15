@@ -47,7 +47,7 @@ function getListePO() {
 
   function genEtatCompte() {
     $http({
-          url: apiBaseUrl + 'getFactureData.php', 
+          url: apiBaseUrl + 'getEtatCompteData.php', 
           method: "GET",
           params: {poid: $scope.curpo.id}
         }).then(function successCallback(response) {
@@ -66,7 +66,7 @@ function getListePO() {
 
   function insertEtatCompte(total) {
     $http({
-          url: apiBaseUrl + 'insertEtatCompte.php', 
+          url: apiBaseUrl + 'addEtatCompte.php', 
           method: "GET",
           params: {poid: $scope.curpo.id, username: total.username, total: total.total}
         }).then(function successCallback(response) {
@@ -84,7 +84,7 @@ function getListePO() {
   function getOrders() {
 
     $http({
-          url: apiBaseUrl + 'orders.php', 
+          url: apiBaseUrl + 'getOrders.php', 
           method: "GET",
           params: {poid: $scope.selectedpo}
         }).then(function successCallback(response) {

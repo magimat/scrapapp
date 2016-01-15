@@ -11,7 +11,7 @@ angular.module('scrapApp').controller('itemsController', ['apiBaseUrl', '$window
   $scope.query.filter = '';
 
   function getItems(query) {
-    $scope.items = $resource(apiBaseUrl + 'items.php').query();
+    $scope.items = $resource(apiBaseUrl + 'getItems.php').query();
     $scope.selected.length = 0;
   }
   
@@ -22,7 +22,7 @@ angular.module('scrapApp').controller('itemsController', ['apiBaseUrl', '$window
       controllerAs: 'ctrl',
       focusOnOpen: false,
       targetEvent: event,
-      templateUrl: 'templates/add-dialog.html',
+      templateUrl: 'dialogs/addItemDialog.html',
     }).then(getItems);
   };
 
@@ -30,7 +30,7 @@ angular.module('scrapApp').controller('itemsController', ['apiBaseUrl', '$window
 
   $scope.getTextToCopy = function() {
     alert("L'url pour commander l'item sélectionné est prête à coller dans le forum!");
-    return 'http://scrapbookartetpassion.com/scrapapp/app/#/order?id=' + $scope.selected[0].id
+    return apiBaseUrl + 'orderRedirect.php?id=' + $scope.selected[0].id
   }
 
 
@@ -42,7 +42,7 @@ angular.module('scrapApp').controller('itemsController', ['apiBaseUrl', '$window
       focusOnOpen: false,
       targetEvent: event,
       locals: { item: $scope.selected[0] },
-      templateUrl: 'templates/edit-dialog.html',
+      templateUrl: 'dialogs/editItemDialog.html',
     }).then(getItems);
   };
 
@@ -55,7 +55,7 @@ angular.module('scrapApp').controller('itemsController', ['apiBaseUrl', '$window
       focusOnOpen: false,
       targetEvent: event,
       locals: { items: $scope.selected },
-      templateUrl: 'templates/delete-dialog.html',
+      templateUrl: 'dialogs/deleteItemDialog.html',
     }).then(getItems);
   };
   
