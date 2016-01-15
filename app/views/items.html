@@ -39,7 +39,9 @@
 	    <div>{{selected.length}} {{selected.length > 1 ? 'items' : 'item'}} selected</div>
 
 	    <div flex></div>
+		
 
+		<span class="msgConfirm">{{ confirmCopy }}</span>
 	    <md-button id="copy-button" clip-copy="getTextToCopy()" ng-show="selected.length == 1" class="md-icon-button">
 	      <md-icon>bookmark</md-icon>
 	    </md-button>

@@ -1,5 +1,5 @@
 
-angular.module('scrapApp').controller('userOrderController', ['apiBaseUrl', '$location', '$http', '$window', '$resource','$mdDialog', '$scope', function (apiBaseUrl, $location, $http, $window, $resource,$mdDialog, $scope) {
+angular.module('scrapApp').controller('userOrdersController', ['apiBaseUrl', '$location', '$http', '$window', '$resource','$mdDialog', '$scope', function (apiBaseUrl, $location, $http, $window, $resource,$mdDialog, $scope) {
   'use strict';
   
   $scope.filter = [];
@@ -66,12 +66,28 @@ function getListePO() {
         }).then(function successCallback(response) {
             $scope.orders = response.data;
             $scope.updateTotal($scope.order);
+            getEtatCompte();
         }, function errorCallback(response) {
             console.log('error!!!');
         });
   }
   
   
+  function getEtatCompte() {
+
+    $http({
+          url: apiBaseUrl + 'getEtatCompte.php', 
+          method: "GET",
+          params: {poid: $scope.selectedpo, user: $scope.user}
+        }).then(function successCallback(response) {
+
+          console.log(response.data)
+            $scope.balance = response.data[0].balance;
+        }, function errorCallback(response) {
+            console.log('error!!!');
+        });
+  }
+
 
 
 

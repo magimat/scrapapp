@@ -127,3 +127,9 @@ md-dialog[add-item-dialog] > md-dialog-content > form > .input-row > md-input-co
   padding: 2em;
 }
 
+.msgConfirm {
+  font-style: italic;
+  color: #555555;
+  font-size: .8em;  
+}
+

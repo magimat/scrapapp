@@ -15,7 +15,7 @@ angular.module('scrapApp').controller('editEtatCompteController', ['apiBaseUrl',
     if($scope.facture.form.$valid) {
     
         $http({
-          url: apiBaseUrl + 'editFacture.php', 
+          url: apiBaseUrl + 'editEtatCompte.php', 
           method: "GET",
           params: {id: $scope.facture.id, recu: $scope.facture.recu, balance: ($scope.facture.total - $scope.facture.recu)}
         }).then(function successCallback(response) {

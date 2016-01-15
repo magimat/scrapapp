@@ -54,6 +54,7 @@ Commande pour {{user}}
               <tr md-row>
                 <th md-column md-order-by="dt_order"><span>DATE</span></th>
                 <th md-column md-order-by="username"><span>User</span></th>
+                <th md-column md-order-by="compagnie"><span>Compagnie</span></th>
                 <th md-column md-order-by="nom"><span>Item</span></th>
                 <th md-column md-numeric md-order-by="quantite"><span>Quantite</span></th>
                 <th md-column md-numeric md-order-by="total"><span>Total</span></th>
@@ -63,6 +64,7 @@ Commande pour {{user}}
               <tr md-row ng-repeat="order in updateTotal((orders | filter: query.filter | orderBy: query.order))">
                 <td md-cell>{{order.dt_order}}</md-cell>
                 <td md-cell>{{order.username}}</md-cell>
+                <td md-cell>{{order.compagnie}}</md-cell>
                 <td md-cell>{{order.nom}}</md-cell>
                 <td md-cell>{{order.quantite}}</md-cell>
                 <td md-cell>{{order.total}}</md-cell>
@@ -82,5 +84,11 @@ Commande pour {{user}}
   <div class="total">Total: {{ total | currency}}</div>
 </section>
 
+<section layout="row" layout-sm="column" layout-align="end center" layout-wrap>
+  <div layout="row" layout-align="start center" flex>
+    <span flex></span>
+  </div>
+  <div class="total">Balance à payer: {{ balance | currency}}</div>
+</section>
 
 

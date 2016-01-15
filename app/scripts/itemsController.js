@@ -1,5 +1,5 @@
 
-angular.module('scrapApp').controller('itemsController', ['apiBaseUrl', '$window', '$resource','$mdDialog', '$scope', function (apiBaseUrl, $window, $resource,$mdDialog, $scope) {
+angular.module('scrapApp').controller('itemsController', ['$timeout', 'apiBaseUrl', '$window', '$resource','$mdDialog', '$scope', function ($timeout, apiBaseUrl, $window, $resource,$mdDialog, $scope) {
   'use strict';
   
   $scope.selected = [];
@@ -10,10 +10,17 @@ angular.module('scrapApp').controller('itemsController', ['apiBaseUrl', '$window
   $scope.query = [];
   $scope.query.filter = '';
 
+  $scope.confirmCopy = '';
+
   function getItems(query) {
     $scope.items = $resource(apiBaseUrl + 'getItems.php').query();
     $scope.selected.length = 0;
   }
+
+  function deleteConfirmMsg() {
+    $scope.confirmCopy = '';
+  }
+
   
   $scope.addItem = function (event) {
     $mdDialog.show({
@@ -29,7 +36,9 @@ angular.module('scrapApp').controller('itemsController', ['apiBaseUrl', '$window
 
 
   $scope.getTextToCopy = function() {
-    alert("L'url pour commander l'item sélectionné est prête à coller dans le forum!");
+
+    $scope.confirmCopy = "L'url pour commander l'item sélectionné est prête à coller dans le forum!"
+    $timeout(deleteConfirmMsg, 3000);
     return apiBaseUrl + 'orderRedirect.php?id=' + $scope.selected[0].id
   }
 
@@ -50,7 +59,7 @@ angular.module('scrapApp').controller('itemsController', ['apiBaseUrl', '$window
   $scope.delete = function (event) {
     $mdDialog.show({
       clickOutsideToClose: true,
-      controller: 'deleteController',
+      controller: 'deleteItemController',
       controllerAs: 'ctrl',
       focusOnOpen: false,
       targetEvent: event,
@@ -60,8 +69,6 @@ angular.module('scrapApp').controller('itemsController', ['apiBaseUrl', '$window
   };
   
   $scope.removeFilter = function () {
-
-    console.log(111);
     $scope.filter.show = false;
     $scope.query.filter = '';
     

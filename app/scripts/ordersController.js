@@ -125,7 +125,7 @@ function getListePO() {
           params: {poid: $scope.curpo.id}
         }).then(function successCallback(response) {
             genEtatCompte();
-            $scope.gotoEtatCompte();
+            $scope.gotoEtatsCompte();
         }, function errorCallback(response) {
             console.log('error!!!');
         });

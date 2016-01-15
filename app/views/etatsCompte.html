@@ -85,7 +85,7 @@
 
 <section layout="row" layout-sm="column" layout-align="end center" layout-wrap>
   <div layout="row" layout-align="start center" flex>
-    <md-button class="md-raised md-primary" layout-align="start" ng-click="sendInvoice()">Envoyer les factures</md-button>
+    <md-button class="md-raised md-primary" layout-align="start" ng-click="sendInvoices()">Envoyer les factures</md-button>         {{ msgConfirmMessages }}
     <span flex></span>
   </div>
   <div class="total">Total à recevoir: {{ total | currency}}</div>

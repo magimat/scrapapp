@@ -1,5 +1,5 @@
 
-angular.module('scrapApp').controller('etatsCompteController', ['apiBaseUrl', '$http', '$window', '$resource','$mdDialog', '$scope', function (apiBaseUrl, $http, $window, $resource,$mdDialog, $scope) {
+angular.module('scrapApp').controller('etatsCompteController', ['$timeout', 'apiBaseUrl', '$http', '$window', '$resource','$mdDialog', '$scope', function ($timeout, apiBaseUrl, $http, $window, $resource,$mdDialog, $scope) {
   'use strict';
   
   $scope.selected = [];
@@ -13,7 +13,27 @@ angular.module('scrapApp').controller('etatsCompteController', ['apiBaseUrl', '$
 
   $scope.total = 0;
 
+  $scope.msgConfirmMessages = '';
 
+
+  var displayedOrders = [];
+
+
+  function deleteConfirmMsg() {
+    $scope.msgConfirmMessages = '';
+  }
+
+  function sendInvoice(order) {
+    $http({
+          url: apiBaseUrl + 'customprivate.php', 
+          method: "GET",
+          params: {user: order.username, balance: order.balance}
+        }).then(function successCallback(response) {
+            console.log('message envoyé!');
+        }, function errorCallback(response) {
+            console.log('error!!!');
+        });
+  }
 
 
   function getListeEtatCompte() {
@@ -33,7 +53,7 @@ angular.module('scrapApp').controller('etatsCompteController', ['apiBaseUrl', '$
 
   function getEtatCompte() {
     $http({
-          url: apiBaseUrl + 'getEtatCompte.php', 
+          url: apiBaseUrl + 'getEtatsCompte.php', 
           method: "GET",
           params: {poid: $scope.curpoid}
         }).then(function successCallback(response) {
@@ -48,7 +68,7 @@ angular.module('scrapApp').controller('etatsCompteController', ['apiBaseUrl', '$
   $scope.edit = function (event) {
     $mdDialog.show({
       clickOutsideToClose: true,
-      controller: 'editFactureController',
+      controller: 'editEtatCompteController',
       controllerAs: 'ctrl',
       focusOnOpen: false,
       targetEvent: event,
@@ -70,6 +90,7 @@ angular.module('scrapApp').controller('etatsCompteController', ['apiBaseUrl', '$
 
 
   $scope.updateTotal = function(orders) {
+    displayedOrders = orders;
     var total = 0;
     angular.forEach(orders, function(order) {
       total = total + parseFloat(order.balance);
@@ -77,6 +98,18 @@ angular.module('scrapApp').controller('etatsCompteController', ['apiBaseUrl', '$
     $scope.total = total;
     return orders;
   }
+
+
+  $scope.sendInvoices = function() {
+    angular.forEach(displayedOrders, function(order) {
+      if(order.balance > 0) {
+          sendInvoice(order);
+      }
+    });
+    $scope.msgConfirmMessages = 'Les messages ont été envoyés!'
+    $timeout(deleteConfirmMsg, 3000);
+  }
+
 
 
   $scope.changepo = function() {

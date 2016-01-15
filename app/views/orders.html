@@ -58,6 +58,7 @@
               <tr md-row>
                 <th md-column md-order-by="dt_order"><span>DATE</span></th>
                 <th md-column md-order-by="username"><span>User</span></th>
+                <th md-column md-order-by="compagnie"><span>Compagnie</span></th>
                 <th md-column md-order-by="nom"><span>Item</span></th>
                 <th md-column md-numeric md-order-by="quantite"><span>Quantite</span></th>
                 <th md-column md-numeric md-order-by="total"><span>Total</span></th>
@@ -67,6 +68,7 @@
               <tr md-row ng-repeat="order in updateTotal((orders | filter: query.filter | orderBy: query.order))">
                 <td md-cell>{{order.dt_order}}</md-cell>
                 <td md-cell>{{order.username}}</md-cell>
+                <td md-cell>{{order.compagnie}}</md-cell>
                 <td md-cell>{{order.nom}}</md-cell>
                 <td md-cell>{{order.quantite}}</md-cell>
                 <td md-cell>{{order.total}}</md-cell>

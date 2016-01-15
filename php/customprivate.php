@@ -37,11 +37,11 @@ $plugins->run_hooks("private_start");
 
 $send_errors = '';
 
+$balance = floatval($_GET['balance']);
 
-
-$sujet = "test msg massif";
-$message = "blablabla si tu peut lire ceci dans un mail, c'est merveilleux!";
-$touser = "magi";
+$sujet = "Votre facture scrapbookartetpassion.com";
+$message = "Bonjour, vous avez une balance à payer de $balance$. \n\nConsultez le site pour le détail de votre commande. \n\n\nmerci!";
+$touser = $_GET['user'];
 
 
 
