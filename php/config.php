@@ -3,7 +3,7 @@
 	ini_set('display_startup_errors', 1);
 	error_reporting(E_ALL);
 
-	$mysqluser = 'root';
-	$mysqlpwd = 'scrapbook40';
+	$mysqluser = '';
+	$mysqlpwd = '';
 
 ?>
