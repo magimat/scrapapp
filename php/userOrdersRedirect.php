@@ -1,6 +1,6 @@
 <?php
 define("IN_MYBB", 1);
-require ('../../global.php'); 
+require ('../forum/global.php'); 
 
 $username = $mybb->user['username'];
 

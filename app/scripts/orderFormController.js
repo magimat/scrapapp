@@ -7,20 +7,21 @@ angular.module('scrapApp').controller('orderFormController', ['apiBaseUrl', '$wi
   this.cancel = $mdDialog.cancel;
   
   $scope.username = $location.search().username
-  $scope.id = $location.search().id
+  $scope.idItem = $location.search().id
 
   $scope.nbItems = 1;
+
+
 
 
   $http({
           url: apiBaseUrl + 'getItem.php', 
           method: "GET",
-          params: {id: $scope.id}
+          params: {id: $scope.idItem}
         }).then(function successCallback(response) {
             $scope.item = response.data;
-
             if($scope.item.actif == 'non disponible') {
-                 $window.location.href = '#/orderfail';
+                 $window.location.href = '#/orderFormFail';
             }
 
         }, function errorCallback(response) {
@@ -36,7 +37,7 @@ angular.module('scrapApp').controller('orderFormController', ['apiBaseUrl', '$wi
             $scope.curpo = response.data;
             console.log($scope.curpo)
         }, function errorCallback(response) {
-            $window.location.href = '#/orderfail';
+            $window.location.href = '#/orderFormFail';
         });
 
 
@@ -46,13 +47,13 @@ angular.module('scrapApp').controller('orderFormController', ['apiBaseUrl', '$wi
         $http({
           url: apiBaseUrl + 'orderItem.php', 
           method: "GET",
-          params: {id: $scope.id, prix: $scope.item.prix, username: $scope.username, quantite: $scope.nbItems, poid: $scope.curpo.id}
+          params: {id: $scope.idItem, prix: $scope.item.prix, username: $scope.username, quantite: $scope.nbItems, poid: $scope.curpo.id}
         }).then(function successCallback(response) {
 
           console.log('ok')
-           $window.location.href = '#/ordersuccess';
+           $window.location.href = '#/orderFormSuccess';
         }, function errorCallback(response) {
-            $window.location.href = '#/orderfail';
+            $window.location.href = '#/orderFormFail';
         });
 
   }

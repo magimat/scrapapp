@@ -33,7 +33,7 @@ var app = angular.module('scrapApp', ['ngClipboard', 'md.data.table', 'ngMateria
           controller: 'orderFormController'
         }).
         when('/orderFormSuccess', {
-          templateUrl: 'views/orderFormsuccess.html',
+          templateUrl: 'views/orderFormSuccess.html',
           controller: 'orderFormController'
         }).
         when('/orderFormFail', {
@@ -41,7 +41,7 @@ var app = angular.module('scrapApp', ['ngClipboard', 'md.data.table', 'ngMateria
           controller: 'orderFormController'
         }).
         otherwise({
-          redirectTo: '/items'
+          redirectTo: '/orders'
         });
 
   }]);

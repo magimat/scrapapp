@@ -39,7 +39,7 @@ angular.module('scrapApp').controller('itemsController', ['$timeout', 'apiBaseUr
 
     $scope.confirmCopy = "L'url pour commander l'item sélectionné est prête à coller dans le forum!"
     $timeout(deleteConfirmMsg, 3000);
-    return apiBaseUrl + 'orderRedirect.php?id=' + $scope.selected[0].id
+    return apiBaseUrl + '../forum/orderRedirect.php?id=' + $scope.selected[0].id
   }
 
 
