@@ -40,8 +40,12 @@ var app = angular.module('scrapApp', ['ngClipboard', 'md.data.table', 'ngMateria
           templateUrl: 'views/orderFormfail.html',
           controller: 'orderFormController'
         }).
+        when('/oops', {
+          templateUrl: 'views/oops.html',
+          controller: 'oopsController'
+        }).
         otherwise({
-          redirectTo: '/orders'
+          redirectTo: '/oops'
         });
 
   }]);
