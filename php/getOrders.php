@@ -10,7 +10,7 @@
     $poid = intval($_GET['poid']);
 
     //fetch table rows from mysql db
-    $sql = "select o.*, i.nom, i.compagnie from orders o, items i where o.item_id = i.id and po_id = $poid";
+    $sql = "select o.*, i.nom, i.compagnie, i.recu from orders o, items i where o.item_id = i.id and po_id = $poid";
     $result = mysqli_query($connection, $sql) or die("Error in Selecting " . mysqli_error($connection));
 
     //create an array

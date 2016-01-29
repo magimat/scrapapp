@@ -37,7 +37,7 @@ var app = angular.module('scrapApp', ['ngClipboard', 'md.data.table', 'ngMateria
           controller: 'orderFormController'
         }).
         when('/orderFormFail', {
-          templateUrl: 'views/orderFormfail.html',
+          templateUrl: 'views/orderFormFail.html',
           controller: 'orderFormController'
         }).
         when('/oops', {

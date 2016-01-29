@@ -28,7 +28,13 @@
           <md-checkbox ng-model="item.actif" ng-true-value="'disponible'" ng-false-value="'non disponible'">
             {{ item.actif }}
           </md-checkbox>
-
+          <br>
+          <div layout="row">
+            Item reçu: &nbsp;&nbsp;&nbsp;
+            <md-checkbox ng-model="item.recu" ng-true-value="'oui'" ng-false-value="'non'">          
+              {{ item.recu }}
+            </md-checkbox>          
+          </div>
       </div>
 
     </form>

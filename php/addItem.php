@@ -9,9 +9,10 @@
     $compagnie = $_GET['compagnie'];
     $prix = floatval($_GET['prix']);
     $actif = $_GET['actif'];
+    $recu = $_GET['recu'];
 
 
-	mysqli_query($connection,"INSERT INTO items(nom, prix, actif, compagnie) VALUES ('$nom', $prix, '$actif', '$compagnie')");
+	mysqli_query($connection,"INSERT INTO items(nom, prix, actif, compagnie, recu) VALUES ('$nom', $prix, '$actif', '$compagnie', '$recu')");
 
 
 

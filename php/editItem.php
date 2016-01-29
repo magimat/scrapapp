@@ -6,12 +6,13 @@
 
     $id = intval($_GET['id']);
     $nom = $_GET['nom'];
+    $recu = $_GET['recu'];
     $compagnie = $_GET['compagnie'];
     $prix = floatval($_GET['prix']);
     $actif = $_GET['actif'];
 
 
-	mysqli_query($connection,"update items set nom = '$nom', prix = $prix, actif = '$actif', compagnie = '$compagnie' where id = $id");
+	mysqli_query($connection,"update items set nom = '$nom', prix = $prix, actif = '$actif', recu = '$recu', compagnie = '$compagnie' where id = $id");
 
 
     mysqli_close($connection);

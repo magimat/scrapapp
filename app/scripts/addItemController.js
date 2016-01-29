@@ -17,7 +17,7 @@ angular.module('scrapApp').controller('addItemController', ['apiBaseUrl', '$mdDi
         $http({
           url: apiBaseUrl + 'addItem.php', 
           method: "GET",
-          params: {nom: $scope.item.nom, actif: $scope.item.actif, prix: $scope.item.prix, compagnie: $scope.item.compagnie}
+          params: {nom: $scope.item.nom, actif: $scope.item.actif, prix: $scope.item.prix, compagnie: $scope.item.compagnie, recu: $scope.item.recu}
         }).then(function successCallback(response) {
             $mdDialog.hide();
         }, function errorCallback(response) {
